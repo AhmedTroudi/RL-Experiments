@@ -1,4 +1,3 @@
-from cell_type import CellType
 import numpy as np
 import csv
 
