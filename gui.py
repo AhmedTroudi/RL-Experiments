@@ -48,7 +48,6 @@ class RobotGUI:
                 elif cell_value == 5:
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='brown', outline='black')  # Obstacle
 
-
     def move_robot(self, new_position):
         # Clear the previous robot position and draw the new one
         row, col = new_position
