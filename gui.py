@@ -61,30 +61,3 @@ class RobotGUI:
             self.canvas.create_rectangle(x1, y1, x2, y2, fill='yellow', outline='black')
 
         self.canvas.update()
-
-
-def main():
-    # Load map from CSV
-    with open('maps/map_01.csv', 'r') as file:
-        map_reader = csv.reader(file)
-        map_data = [list(map(int, row)) for row in map_reader]
-
-    root = tk.Tk()
-    root.title("Robot GUI")
-
-    robot_gui = RobotGUI(root, map_data)
-
-    # Simulate robot movement (replace this with your actual movement logic)
-    robot_moves = [(1, 0), (2, 0), (3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4)]
-
-    for move in robot_moves:
-        robot_gui.move_robot(move)
-        root.update_idletasks()
-        root.update()
-        root.after(500)  # Adjust the delay (in milliseconds) to control the speed of the visualization
-
-    root.mainloop()
-
-
-if __name__ == "__main__":
-    main()
