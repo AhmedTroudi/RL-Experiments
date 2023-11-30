@@ -38,13 +38,16 @@ class RobotGUI:
                     self.robot_position = (row, col)
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='blue', outline='black')  # Robot
                 elif cell_value == 2:
-                    self.canvas.create_rectangle(x1, y1, x2, y2, fill='gray', outline='black')  # Obstacle
+                    self.canvas.create_rectangle(x1, y1, x2, y2, fill='grey', outline='black')  # Obstacle
                 elif cell_value == 3:
                     self.goal_position = (row, col)
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='green', outline='black')  # Goal
                 elif cell_value == 4:
                     self.trail_positions.add((row, col))
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='yellow', outline='black')  # Trail
+                elif cell_value == 5:
+                    self.canvas.create_rectangle(x1, y1, x2, y2, fill='brown', outline='black')  # Obstacle
+
 
     def move_robot(self, new_position):
         # Clear the previous robot position and draw the new one
