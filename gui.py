@@ -2,7 +2,7 @@ import tkinter as tk
 
 
 class RobotGUI:
-    def __init__(self, master, map_data, cell_size=100):
+    def __init__(self, master, map_data, cell_size=80):
         self.master = master
         self.map_data = map_data
         self.rows = len(map_data)
@@ -28,8 +28,8 @@ class RobotGUI:
             for col in range(self.cols):
                 cell_value = int(self.map_data[row][col])
 
-                x1, y1 = col * 100, row * 100
-                x2, y2 = x1 + 100, y1 + 100
+                x1, y1 = col * self.cell_size, row * self.cell_size
+                x2, y2 = x1 + self.cell_size, y1 + self.cell_size
 
                 if cell_value == 0:
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='white', outline='black')
@@ -50,8 +50,8 @@ class RobotGUI:
     def move_robot(self, new_position):
         # Clear the previous robot position and draw the new one
         row, col = new_position
-        x1, y1 = col * 100, row * 100
-        x2, y2 = x1 + 100, y1 + 100
+        x1, y1 = col * self.cell_size, row * self.cell_size
+        x2, y2 = x1 + self.cell_size, y1 + self.cell_size
         self.canvas.create_rectangle(x1, y1, x2, y2, fill='blue', outline='black')
 
         # Draw the trail if the new position is not an obstacle or goal

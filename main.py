@@ -9,7 +9,7 @@ from environment import Environment
 def main():
     parser = argparse.ArgumentParser(description="Robot simulation with Dyna-Q learning")
     parser.add_argument("--filename", type=str, default="maps/map_01.csv", help="Path to the map file")
-    parser.add_argument("--epochs", type=int, default=100, help="Number of epochs for the simulation")
+    parser.add_argument("--epochs", type=int, default=150, help="Number of epochs for the simulation")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose mode")
     args = parser.parse_args()
 
