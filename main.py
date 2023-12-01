@@ -25,7 +25,8 @@ def main():
     root.title("Robot GUI")
     robot_gui = RobotGUI(root, map_layout)
 
-    learner = DynaQ(num_states=150, num_actions=4, alpha=0.2, gamma=0.9, dyna=args.dyna, verbose=False)
+    learner = DynaQ(num_states=150, num_actions=4, alpha=0.2, epsilon=0.99, epsilon_decay=0.999, gamma=0.9,
+                    dyna=args.dyna, verbose=False)
 
     total_reward = environment.run_episode(args.epochs, learner, args.verbose)
 
