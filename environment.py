@@ -1,39 +1,42 @@
 import random as rand
 import numpy as np
 from cell_type import CellType
+from typing import Tuple
+from learner import Learner
 
 
 class Environment:
-    def __init__(self, world):
+    def __init__(self, world: np.ndarray):
         self.world = world
         self.default_reward = -1
         self.mud_reward = -100
         self.goal_reward = 1
         self.random_action_chance = 0.1
+        self.robot_moves = []
 
-    def get_target_position(self, target):
+    def get_target_position(self, target: int):
         for row in range(self.world.shape[0]):
             for col in range(self.world.shape[1]):
                 if self.world[row, col] == target:
                     return row, col
         return -100, -100
 
-    def select_action(self, action):
+    def select_action(self, action: int):
         if rand.uniform(0.0, 1.0) <= self.random_action_chance:
             action = rand.randint(0, 3)  # choose the random direction
         return action
 
     @staticmethod
-    def try_move(x, y, action):
+    def try_move(x: int, y: int, action: int):
         moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]
         x += moves[action][0]
         y += moves[action][1]
         return x, y
 
-    def is_move_possible(self, x, y):
+    def is_move_possible(self, x: int, y: int):
         return 0 <= x < self.world.shape[0] and 0 <= y < self.world.shape[1]
 
-    def perform_move(self, x, y, previous_pos):
+    def perform_move(self, x: int, y: int, previous_pos: Tuple):
         reward = self.default_reward
         cell_value = self.world[x, y]
 
@@ -49,7 +52,7 @@ class Environment:
 
         return (x, y), reward
 
-    def move_robot(self, previous_pos, action):
+    def move_robot(self, previous_pos: Tuple, action: int):
         x, y = previous_pos
 
         action = self.select_action(action)
@@ -62,10 +65,10 @@ class Environment:
         return self.perform_move(x, y, previous_pos)
 
     @staticmethod
-    def position_to_state(coordinates):
-        return coordinates[0] * 10 + coordinates[1]
+    def position_to_state(position: Tuple):
+        return position[0] * 10 + position[1]
 
-    def run_episode(self, epochs, learner, verbose):
+    def run_episode(self, epochs: int, learner: Learner, verbose: int):
         start_position = self.get_target_position(CellType.ROBOT.value)
         goal_position = self.get_target_position(CellType.GOAL.value)
         rewards = np.zeros((epochs, 1))
@@ -74,9 +77,10 @@ class Environment:
             total_reward = 0
             robot_position = start_position
             state = self.position_to_state(robot_position)
-            action = learner.act_without_updating_q_table(state)
+            action = learner.act_without_updating_policy(state)
             count = 0
-            robot_moves = []
+            # new episode, reset moves
+            self.robot_moves = []
 
             while robot_position != goal_position and count < 10000:
                 new_position, step_reward = self.move_robot(robot_position, action)
@@ -92,7 +96,7 @@ class Environment:
                 robot_position = new_position
                 total_reward += step_reward
                 count += 1
-                robot_moves.append(new_position)
+                self.robot_moves.append(new_position)
 
             if count == 100000:
                 print("timeout")
@@ -102,4 +106,4 @@ class Environment:
 
             rewards[epoch, 0] = total_reward
 
-        return np.mean(rewards), robot_moves
+        return np.mean(rewards)

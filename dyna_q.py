@@ -2,9 +2,10 @@ import random
 
 import numpy as np
 from typing import Optional
+from learner import Learner
 
 
-class DynaQ:
+class DynaQ(Learner):
     """
     Q-learning with Dyna option.
     """
@@ -29,7 +30,7 @@ class DynaQ:
             self.T = np.zeros((self.num_states, self.num_actions, self.num_states), dtype=float)
             self.Tc = np.full((self.num_states, self.num_actions, self.num_states), 0.001)
 
-    def act_without_updating_q_table(self, state: int) -> int:
+    def act_without_updating_policy(self, state: int) -> int:
         selected_action = self.select_action(state)
 
         self.state = state
@@ -63,7 +64,7 @@ class DynaQ:
         current_value = self.Q[state, action]
         self.Q[state, action] = (1 - self.alpha) * current_value + self.alpha * target
 
-    def select_action(self, state: int):
+    def select_action(self, state: int) -> int:
         if random.uniform(0.0, 1.0) <= self.epsilon:
             action = random.randint(0, self.num_actions - 1)  # choose a random action
             return action

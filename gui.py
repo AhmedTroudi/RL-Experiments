@@ -1,8 +1,10 @@
 import tkinter as tk
+from typing import Tuple
+import numpy as np
 
 
 class RobotGUI:
-    def __init__(self, master, map_data, cell_size=80):
+    def __init__(self, master: tk.Misc, map_data: np.ndarray, cell_size: int = 80):
         self.master = master
         self.map_data = map_data
         self.rows = len(map_data)
@@ -47,7 +49,7 @@ class RobotGUI:
                 elif cell_value == 5:
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='brown', outline='black')  # Obstacle
 
-    def move_robot(self, new_position):
+    def move_robot(self, new_position: Tuple):
         # Clear the previous robot position and draw the new one
         row, col = new_position
         x1, y1 = col * self.cell_size, row * self.cell_size
