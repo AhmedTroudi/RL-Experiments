@@ -4,11 +4,12 @@ import numpy as np
 
 
 class RobotGUI:
-    def __init__(self, master: tk.Misc, map_data: np.ndarray, cell_size: int = 80):
+    def __init__(self, master: tk.Misc, map_data: np.ndarray, start_position: int,
+                 goal_position: int, cell_size: int = 40):
         self.master = master
         self.map_data = map_data
-        self.rows = len(map_data)
-        self.cols = len(map_data[0])
+        self.rows = map_data.shape[0]
+        self.cols = map_data.shape[1]
         self.cell_size = cell_size
 
         self.canvas_width = self.cols * self.cell_size
@@ -17,8 +18,8 @@ class RobotGUI:
         self.canvas = tk.Canvas(master, width=self.canvas_width, height=self.canvas_height, bg='white')
         self.canvas.pack()
 
-        self.robot_position = None
-        self.goal_position = None
+        self.robot_position = start_position
+        self.goal_position = goal_position
         self.trail_positions = set()
 
         self.draw_map()
@@ -37,7 +38,7 @@ class RobotGUI:
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='white', outline='black')
                 elif cell_value == 1:
                     self.robot_position = (row, col)
-                    self.canvas.create_rectangle(x1, y1, x2, y2, fill='blue', outline='black')  # Robot
+                    self.canvas.create_rectangle(x1, y1, x2, y2, fill='black', outline='black')  # Robot
                 elif cell_value == 2:
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='grey', outline='black')  # Obstacle
                 elif cell_value == 3:
@@ -50,14 +51,14 @@ class RobotGUI:
                     self.canvas.create_rectangle(x1, y1, x2, y2, fill='brown', outline='black')  # Obstacle
 
     def move_robot(self, new_position: Tuple):
-        # Clear the previous robot position and draw the new one
         row, col = new_position
         x1, y1 = col * self.cell_size, row * self.cell_size
         x2, y2 = x1 + self.cell_size, y1 + self.cell_size
-        self.canvas.create_rectangle(x1, y1, x2, y2, fill='blue', outline='black')
+        if new_position != self.goal_position:  # color in blue cells where the robot steps more than once
+            self.canvas.create_rectangle(x1, y1, x2, y2, fill='blue', outline='black')
 
         # Draw the trail if the new position is not an obstacle or goal
-        if new_position not in self.trail_positions and new_position != self.goal_position:
+        if new_position not in self.trail_positions and new_position != self.goal_position and new_position != self.robot_position:
             self.trail_positions.add(new_position)
             self.canvas.create_rectangle(x1, y1, x2, y2, fill='yellow', outline='black')
 

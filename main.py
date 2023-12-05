@@ -23,7 +23,7 @@ def main():
     # Initialize UI
     root = tk.Tk()
     root.title("Robot GUI")
-    robot_gui = RobotGUI(root, map_layout)
+    robot_gui = RobotGUI(root, map_layout, environment.start_position, environment.goal_position)
 
     learner = DynaQ(num_states=150, num_actions=4, alpha=0.2, epsilon=0.9999, epsilon_decay=0.99999, gamma=0.9,
                     dyna=args.dyna, verbose=False)

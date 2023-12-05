@@ -12,6 +12,8 @@ class Environment:
         self.mud_reward = -100
         self.goal_reward = 1
         self.random_action_chance = 0.1
+        self.start_position = self.get_target_position(CellType.ROBOT.value)
+        self.goal_position = self.get_target_position(CellType.GOAL.value)
         self.robot_moves = []
 
     def get_target_position(self, target: int):
@@ -69,23 +71,21 @@ class Environment:
         return position[0] * 10 + position[1]
 
     def run_episode(self, epochs: int, learner: Learner, verbose: int):
-        start_position = self.get_target_position(CellType.ROBOT.value)
-        goal_position = self.get_target_position(CellType.GOAL.value)
         rewards = np.zeros((epochs, 1))
 
         for epoch in range(epochs):
             total_reward = 0
-            robot_position = start_position
+            robot_position = self.start_position
             state = self.position_to_state(robot_position)
             action = learner.act_without_updating_policy(state)
             count = 0
             # new episode, reset moves
             self.robot_moves = []
 
-            while robot_position != goal_position and count < 10000:
+            while robot_position != self.goal_position and count < 10000:
                 new_position, step_reward = self.move_robot(robot_position, action)
 
-                if new_position == goal_position:
+                if new_position == self.goal_position:
                     r = self.goal_reward
                 else:
                     r = step_reward
