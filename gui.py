@@ -58,7 +58,8 @@ class RobotGUI:
             self.canvas.create_rectangle(x1, y1, x2, y2, fill='blue', outline='black')
 
         # Draw the trail if the new position is not an obstacle or goal
-        if new_position not in self.trail_positions and new_position != self.goal_position and new_position != self.robot_position:
+        if (new_position not in self.trail_positions and new_position != self.goal_position
+                and new_position != self.robot_position):
             self.trail_positions.add(new_position)
             self.canvas.create_rectangle(x1, y1, x2, y2, fill='yellow', outline='black')
 
