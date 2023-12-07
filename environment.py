@@ -21,7 +21,7 @@ class Environment:
             for col in range(self.world.shape[1]):
                 if self.world[row, col] == target:
                     return row, col
-        return -100, -100
+        raise ValueError(f"Invalid map: The target {target} does not exist in the map.")
 
     def select_action(self, action: int):
         if rand.uniform(0.0, 1.0) <= self.random_action_chance:

@@ -1,6 +1,6 @@
 [![Python 3.12.0](https://img.shields.io/badge/python-3.12.0-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 
-## RL Experiments
+# RL Experiments
 
 ## Description
 This is an example of the path the robot decides to take using Q-Learning
@@ -28,8 +28,8 @@ python main.py --epochs 5000
 
 `--epochs`: number of episodes
 
-`--filename`: you can create your own n-by-n map by providing your own csv file and 
-feeding to the script using this argument. You can look into `cell_type.py` to know how
+`--filename`: you can create your own map by providing your own csv file and 
+feeding to the script using this argument. You can look into the enum `cell_type.py` to know how
 to encode the cells (obstacles etc...)
 
 `--dyna`: number of iterations for dyna, by default = 0 (disabled)

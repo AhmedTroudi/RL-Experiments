@@ -2,10 +2,10 @@ from enum import Enum
 
 
 class CellType(Enum):
-    VOID = 0
-    ROBOT = 1
-    WALL = 2
-    GOAL = 3
-    PATH = 4
-    MUD = 5
-    IN_MUD = 6
+    VOID: int = 0
+    ROBOT: int = 1
+    WALL: int = 2
+    GOAL: int = 3
+    PATH: int = 4
+    MUD: int = 5
+    IN_MUD: int = 6
