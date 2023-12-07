@@ -8,8 +8,7 @@ when the environment is stochastic (random action chance = 10%).
 - red is mud (gives very bad negative rewards)
 - grey are obstacles
 - yellow is the path taken
-- blue cells indicate that it stepped more than once there,
-so the path shown here is not the optimal path.
+- blue cells indicate that it stepped there more than once.
 
 In this example, it avoids the
 path close to the red cells and decides to follow the slightly longer 'safer' path, 
