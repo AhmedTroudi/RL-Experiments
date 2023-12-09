@@ -42,14 +42,14 @@ class Environment:
         reward = self.default_reward
         cell_value = self.world[x, y]
 
-        if cell_value == CellType.WALL.value:
+        if cell_value == CellType.WALL:
             x, y = previous_pos
-        elif cell_value == CellType.GOAL.value:
+        elif cell_value == CellType.GOAL:
             reward = self.goal_reward
-        elif cell_value == CellType.MUD.value:
+        elif cell_value == CellType.MUD:
             reward = self.mud_reward
-            self.world[x, y] = CellType.IN_MUD.value
-        elif cell_value == CellType.IN_MUD.value:
+            self.world[x, y] = CellType.IN_MUD
+        elif cell_value == CellType.IN_MUD:
             reward = self.mud_reward
 
         return (x, y), reward

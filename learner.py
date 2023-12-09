@@ -14,4 +14,3 @@ class Learner(ABC):
     @abstractmethod
     def select_action(self, state: int) -> int:
         pass
-
