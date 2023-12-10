@@ -20,7 +20,7 @@ class RobotGUI:
 
         self.robot_position = start_position
         self.goal_position = goal_position
-        self.trail_positions = set()
+        self.trail_positions: set = set()
 
         self.draw_map()
 

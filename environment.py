@@ -14,7 +14,7 @@ class Environment:
         self.random_action_chance = 0.1
         self.start_position = self.get_target_position(CellType.ROBOT.value)
         self.goal_position = self.get_target_position(CellType.GOAL.value)
-        self.robot_moves = []
+        self.robot_moves: list = []
 
     def get_target_position(self, target: int):
         for row in range(self.world.shape[0]):
