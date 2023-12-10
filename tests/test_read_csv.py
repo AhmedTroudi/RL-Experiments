@@ -3,7 +3,7 @@ import os
 from unittest.mock import mock_open
 import pytest
 import numpy as np
-from rl_experiments.helper import read_csv
+from src.rl_experiments.helper import read_csv
 
 
 def test_data_shape_and_type():
