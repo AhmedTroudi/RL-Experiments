@@ -13,15 +13,15 @@ class DynaQ(Learner):
     # pylint: disable=too-many-instance-attributes
     # pylint: disable=too-many-arguments
     def __init__(
-        self,
-        num_states: int = 100,
-        num_actions: int = 4,
-        alpha: float = 0.2,
-        gamma: float = 0.9,
-        epsilon: float = 0.5,
-        epsilon_decay: float = 0.99,
-        dyna: int = 0,
-        verbose: bool = False,
+            self,
+            num_states: int = 100,
+            num_actions: int = 4,
+            alpha: float = 0.2,
+            gamma: float = 0.9,
+            epsilon: float = 0.5,
+            epsilon_decay: float = 0.99,
+            dyna: int = 0,
+            verbose: bool = False,
     ):
         self.verbose = verbose
         self.num_actions = num_actions
@@ -35,7 +35,7 @@ class DynaQ(Learner):
         self.action = 0
         self.q_table = np.zeros((num_states, num_actions), dtype=float)
 
-        if dyna > 0:
+        if self.dyna > 0:
             self.reward_matrix = np.zeros(
                 (self.num_states, self.num_actions), dtype=float
             )
@@ -43,8 +43,7 @@ class DynaQ(Learner):
                 (self.num_states, self.num_actions, self.num_states), dtype=float
             )
             self.experiences_count = np.full(
-                (self.num_states, self.num_actions, self.num_states), 0.001
-            )
+                (self.num_states, self.num_actions, self.num_states), 0.001)
 
     def act_without_updating_policy(self, state: int) -> int:
         selected_action = self.select_action(state)

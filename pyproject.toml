@@ -1,7 +1,7 @@
 [project]
-name = ""
-version = ""
-description = ""
+name = "rl_experiments"
+version = "1.0"
+description = "Trying out RL algorithms..."
 authors = [
     {name = "Ahmed Troudi", email = "ahmed.troudi.fst@gmail.com"},
 ]
