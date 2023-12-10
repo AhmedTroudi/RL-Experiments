@@ -1,7 +1,7 @@
 import random as rand
+from typing import Tuple
 import numpy as np
 from cell_type import CellType
-from typing import Tuple
 from learner import Learner
 
 
@@ -42,14 +42,14 @@ class Environment:
         reward = self.default_reward
         cell_value = self.world[x, y]
 
-        if cell_value == CellType.WALL:
+        if cell_value == CellType.WALL.value:
             x, y = previous_pos
-        elif cell_value == CellType.GOAL:
+        elif cell_value == CellType.GOAL.value:
             reward = self.goal_reward
-        elif cell_value == CellType.MUD:
+        elif cell_value == CellType.MUD.value:
             reward = self.mud_reward
-            self.world[x, y] = CellType.IN_MUD
-        elif cell_value == CellType.IN_MUD:
+            self.world[x, y] = CellType.IN_MUD.value
+        elif cell_value == CellType.IN_MUD.value:
             reward = self.mud_reward
 
         return (x, y), reward
