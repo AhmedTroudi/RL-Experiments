@@ -15,6 +15,7 @@ jobs:
         python-version: 3.11
     - name: Install dependencies
       run: |
+        curl -sSL https://pdm-project.org/install-pdm.py | python3 -
         pdm install
     - name: Analysing the code with pylint
       run: |
