@@ -1,11 +1,6 @@
 [![Python 3.11.0](https://img.shields.io/badge/python-3.11.0-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 
 # RL Experiments
-## Setup
-
-### Linux/MacOS
-
-on MacOS you need to configure Python for tkinter:
 ```
 brew install python-tk
 ```
