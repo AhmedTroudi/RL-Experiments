@@ -1,10 +1,10 @@
 import argparse
 import tkinter as tk
 
-from dyna_q import DynaQ
-from environment import Environment
-from gui import RobotGUI
-from helper import read_csv
+from rl_experiments.dyna_q import DynaQ
+from rl_experiments.environment import Environment
+from rl_experiments.gui import RobotGUI
+from rl_experiments.helper import read_csv
 
 
 def main():

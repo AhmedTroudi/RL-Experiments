@@ -3,7 +3,7 @@ from typing import Optional
 
 import numpy as np
 
-from learner import Learner
+from rl_experiments.learner import Learner
 
 
 class DynaQ(Learner):

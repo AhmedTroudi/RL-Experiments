@@ -3,8 +3,8 @@ from typing import Tuple
 
 import numpy as np
 
-from cell_type import CellType
-from learner import Learner
+from rl_experiments.cell_type import CellType
+from rl_experiments.learner import Learner
 
 
 class Environment:
