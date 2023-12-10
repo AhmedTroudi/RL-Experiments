@@ -18,11 +18,11 @@ path close to the red cells and decides to follow the slightly longer 'safer' pa
 ## Prerequisites 
 PDM: https://github.com/pdm-project/pdm/tree/main
 
-For Linux/MacOS:
+For Linux/macOS:
 
 ```curl -sSL https://pdm-project.org/install-pdm.py | python3 -```
 
-Alternatively, using Homebrew on MacOS:
+Alternatively, using Homebrew on macOS:
 
 ```brew install pdm```
 
