@@ -2,6 +2,7 @@ import random
 from typing import Optional
 
 import numpy as np
+
 from learner import Learner
 
 
@@ -9,11 +10,19 @@ class DynaQ(Learner):
     """
     Q-learning with Dyna option.
     """
-
-    def __init__(self, num_states: int = 100, num_actions: int = 4, alpha: float = 0.2,
-                 gamma: float = 0.9, epsilon: float = 0.5, epsilon_decay: float = 0.99,
-                 dyna: int = 0, verbose: bool = False):
-
+    # pylint: disable=too-many-instance-attributes
+    # pylint: disable=too-many-arguments
+    def __init__(
+        self,
+        num_states: int = 100,
+        num_actions: int = 4,
+        alpha: float = 0.2,
+        gamma: float = 0.9,
+        epsilon: float = 0.5,
+        epsilon_decay: float = 0.99,
+        dyna: int = 0,
+        verbose: bool = False,
+    ):
         self.verbose = verbose
         self.num_actions = num_actions
         self.num_states = num_states
@@ -27,11 +36,15 @@ class DynaQ(Learner):
         self.q_table = np.zeros((num_states, num_actions), dtype=float)
 
         if dyna > 0:
-            self.reward_matrix = np.zeros((self.num_states, self.num_actions), dtype=float)
-            self.transition_matrix = np.zeros((self.num_states, self.num_actions,
-                                               self.num_states), dtype=float)
-            self.experiences_count = np.full((self.num_states, self.num_actions,
-                                              self.num_states), 0.001)
+            self.reward_matrix = np.zeros(
+                (self.num_states, self.num_actions), dtype=float
+            )
+            self.transition_matrix = np.zeros(
+                (self.num_states, self.num_actions, self.num_states), dtype=float
+            )
+            self.experiences_count = np.full(
+                (self.num_states, self.num_actions, self.num_states), 0.001
+            )
 
     def act_without_updating_policy(self, state: int) -> int:
         selected_action = self.select_action(state)
@@ -62,11 +75,18 @@ class DynaQ(Learner):
 
         return action
 
-    def update_qtable(self, state: int, action: int, new_state: int,
-                      reward: Optional[float | np.ndarray]):
+    def update_qtable(
+        self,
+        state: int,
+        action: int,
+        new_state: int,
+        reward: Optional[float | np.ndarray],
+    ):
         target = reward + self.gamma * np.max(self.q_table[new_state, :])
         current_value = self.q_table[state, action]
-        self.q_table[state, action] = (1 - self.alpha) * current_value + self.alpha * target
+        self.q_table[state, action] = (
+            1 - self.alpha
+        ) * current_value + self.alpha * target
 
     def select_action(self, state: int) -> int:
         if random.uniform(0.0, 1.0) <= self.epsilon:
@@ -79,13 +99,14 @@ class DynaQ(Learner):
     def update_transitions(self, new_state: int):
         # increment count for number of times this experience occurred
         self.experiences_count[self.state, self.action, new_state] += 1
-        self.transition_matrix = self.experiences_count / np.sum(self.experiences_count, axis=0)
+        self.transition_matrix = self.experiences_count / np.sum(
+            self.experiences_count, axis=0
+        )
 
     def update_rewards(self, reward: float):
-        self.reward_matrix[self.state,
-                           self.action] = (self.reward_matrix[self.state, self.action] +
-                                           self.alpha *
-                                           (reward - self.reward_matrix[self.state, self.action]))
+        self.reward_matrix[self.state, self.action] = self.reward_matrix[
+            self.state, self.action
+        ] + self.alpha * (reward - self.reward_matrix[self.state, self.action])
 
     def run_dyna(self, new_state: int, reward: float):
         self.update_transitions(new_state)

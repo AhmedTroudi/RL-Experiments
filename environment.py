@@ -1,6 +1,8 @@
 import random as rand
 from typing import Tuple
+
 import numpy as np
+
 from cell_type import CellType
 from learner import Learner
 
