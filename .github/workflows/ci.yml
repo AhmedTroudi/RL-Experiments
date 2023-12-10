@@ -15,12 +15,11 @@ jobs:
         python-version: 3.11
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install numpy pylint pytest pytest-mock
+        pdm install
     - name: Analysing the code with pylint
       run: |
-        find . -name '*.py' -exec pylint {} \;
+        pdm run pylint src/
     - name: Running tests
       run: |
-        pytest tests
+        pdm run pytest tests/
 

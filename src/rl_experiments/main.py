@@ -15,7 +15,7 @@ def main():
         "--filename", type=str, default="maps/map_01.csv", help="Path to the map file"
     )
     parser.add_argument(
-        "--epochs", type=int, default=150, help="Number of epochs for the simulation"
+        "--epochs", type=int, default=5000, help="Number of epochs for the simulation"
     )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose mode")
     parser.add_argument("--dyna", type=int, default=0, help="Enable Dyna")
