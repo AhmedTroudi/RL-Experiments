@@ -1,7 +1,8 @@
 [![Python 3.11.0](https://img.shields.io/badge/python-3.11.0-blue.svg)](https://www.python.org/downloads/release/python-3120/)
-
 # RL Experiments
-This is an example of the path the robot decides to take using Q-Learning
+The goal of this repository is to implement different RL algorithms from scratch and compare them on the same tasks for educational purposes.
+
+Below is an example of the path the robot decides to take using Q-Learning
 when the environment is stochastic (random action chance = 10%).
 - red is mud (gives very bad negative rewards)
 - grey are obstacles
