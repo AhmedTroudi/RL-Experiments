@@ -2,7 +2,8 @@
 # RL Experiments
 The goal of this repository is to implement different RL algorithms from scratch and compare them on the same tasks for educational purposes.
 
-Below is an example of the path the robot decides to take using Q-Learning
+## Example
+Below is the path the robot decides to take using Q-Learning (after enough iterations)
 when the environment is stochastic (random action chance = 10%).
 - red is mud (gives very bad negative rewards)
 - grey are obstacles
